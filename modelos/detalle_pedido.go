@@ -7,14 +7,14 @@ type DetallePedido struct {
 	idDetalle int
 	idPedido int
 	idProducto int
-	Cantidad int
-	PrecioUnitario float64
-	Subtotal float64
+	cantidad int
+	precioUnitario float64
+	subtotal float64
 }
 
 // NuevoDetallePedido crea un nuevo detalle de pedido validando los datos básicos.
-func NuevoDetallePedido(idDetalle int,idPedido int,idProducto int,Cantidad int,
-PrecioUnitario float64,Subtotal float64,) (*DetallePedido, error) {
+func NuevoDetallePedido(idDetalle int,idPedido int,idProducto int,cantidad int,
+precioUnitario float64,subtotal float64,) (*DetallePedido, error) {
 
 	if idDetalle <= 0 {
 		return nil, fmt.Errorf("El ID del Detalle debe ser mayor a cero")
@@ -28,15 +28,15 @@ PrecioUnitario float64,Subtotal float64,) (*DetallePedido, error) {
 		return nil, fmt.Errorf("El ID del Producto debe ser mayor a cero")
 	}
 
-	if Cantidad <= 0 {
+	if cantidad <= 0 {
 		return nil, fmt.Errorf("La Cantidad debe ser mayor a cero")
 	}
 
-	if PrecioUnitario <= 0 {
+	if precioUnitario <= 0 {
 		return nil, fmt.Errorf("El Precio Unitario debe ser mayor a cero")
 	}
 
-	if Subtotal <= 0 {
+	if subtotal <= 0 {
 		return nil, fmt.Errorf("El Subtotal debe ser mayor a cero")
 	}
 
@@ -45,12 +45,13 @@ PrecioUnitario float64,Subtotal float64,) (*DetallePedido, error) {
 		idDetalle: idDetalle,
 		idPedido:  idPedido,
 		idProducto: idProducto,
-		Cantidad: Cantidad,
-		PrecioUnitario: PrecioUnitario,
-		Subtotal: Subtotal,
+		cantidad: cantidad,
+		precioUnitario: precioUnitario,
+		subtotal: subtotal,
 	}, nil
 }
 
+// LOS GET
 func (d *DetallePedido) GetidDetalle() int {
 	return d.idDetalle
 }
@@ -64,32 +65,32 @@ func (d *DetallePedido) GetidProducto() int {
 }
 
 func (d *DetallePedido) GetCantidad() int {
-	return d.Cantidad
+	return d.cantidad
 }
 func (d *DetallePedido) GetPrecioUnitario() float64 {
-	return d.PrecioUnitario
+	return d.precioUnitario
 }
 
 func (d *DetallePedido) GetSubtotal() float64 {
-	return d.Subtotal
+	return d.subtotal
 }
 
 // SET
-func (d *DetallePedido) SetCantidad(Cantidad int) error {
-	if Cantidad <= 0 {
+func (d *DetallePedido) SetCantidad(cantidad int) error {
+	if cantidad <= 0 {
 		return fmt.Errorf("la cantidad debe ser mayor a cero")
 	}
-	d.Cantidad = Cantidad
+	d.cantidad = cantidad
 	d.ActualizarSubtotal()
 	return nil
 
 }
 
-func (d *DetallePedido) SetPrecioUnitario(PrecioUnitario float64) error {
-	if PrecioUnitario <= 0 {
+func (d *DetallePedido) SetPrecioUnitario(precioUnitario float64) error {
+	if precioUnitario <= 0 {
 		return fmt.Errorf("el precio unitario debe ser mayor a cero")
 	}
-	d.PrecioUnitario = PrecioUnitario
+	d.precioUnitario = precioUnitario
 	d.ActualizarSubtotal()
 	return nil
 
@@ -97,5 +98,5 @@ func (d *DetallePedido) SetPrecioUnitario(PrecioUnitario float64) error {
 
 // ActualizarSubtotal calcula nuevamente el subtotal.
 func (d *DetallePedido) ActualizarSubtotal() {
-	d.Subtotal = float64(d.Cantidad) * d.PrecioUnitario
+	d.subtotal = float64(d.cantidad) * d.precioUnitario
 }

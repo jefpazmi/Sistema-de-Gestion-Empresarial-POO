@@ -2,64 +2,64 @@ package modelos
 
 import "fmt"
 
-// Usuario representa a un cliente registrado en el Sistema
+// Usuario representa a un cliente registrado en el Sistema.
 type Usuario struct {
-	idUsuario  int
-	Nombre     string
-	Apellido   string
-	Correo     string
-	Contrasena string
-	Telefono   string
-	Rol        string
+	IdUsuario  int    `json:"idUsuario"`
+	Nombre     string `json:"nombre"`
+	Apellido   string `json:"apellido"`
+	Correo     string `json:"correo"`
+	Contrasena string `json:"-"`
+	Telefono   string `json:"telefono"`
+	Rol        string `json:"rol"`
 }
 
-// NuevoUsuario crea un nuevo usuario validando los datos basicos
-func NuevoUsuario(idUsuario int, Nombre string, Apellido string, Correo string,
-	Contrasena string, Telefono string, Rol string) (*Usuario, error) {
+// NuevoUsuario crea un nuevo usuario validando los datos básicos.
+func NuevoUsuario(idUsuario int, nombre string, apellido string, correo string,
+	contrasena string, telefono string, rol string) (*Usuario, error) {
 
 	if idUsuario <= 0 {
 		return nil, fmt.Errorf("El ID del Usuario debe ser mayor a cero")
 	}
 
-	if Nombre == "" {
+	if nombre == "" {
 		return nil, fmt.Errorf("El Nombre del usuario no debe estar vacio")
 	}
 
-	if Apellido == "" {
+	if apellido == "" {
 		return nil, fmt.Errorf("El Apellido del usuario no debe estar vacio")
 	}
 
-	if Correo == "" {
+	if correo == "" {
 		return nil, fmt.Errorf("El Correo del usuario no debe estar vacio")
 	}
 
-	if Contrasena == "" {
+	if contrasena == "" {
 		return nil, fmt.Errorf("La Contrasena del usuario no debe estar vacio")
 	}
 
-	if Telefono == "" {
+	if telefono == "" {
 		return nil, fmt.Errorf("El Telefono del usuario no debe estar vacio")
 	}
 
-	if Rol == "" {
+	if rol == "" {
 		return nil, fmt.Errorf("El Rol del usuario no debe estar vacio")
 	}
 
 	return &Usuario{
-		idUsuario:  idUsuario,
-		Nombre:     Nombre,
-		Apellido:   Apellido,
-		Correo:     Correo,
-		Contrasena: Contrasena,
-		Telefono:   Telefono,
-		Rol:        Rol,
+		IdUsuario:  idUsuario,
+		Nombre:     nombre,
+		Apellido:   apellido,
+		Correo:     correo,
+		Contrasena: contrasena,
+		Telefono:   telefono,
+		Rol:        rol,
 	}, nil
-
 }
 
-// Los GET devuelve la informacion que tiene cada varaiable de usuario.
+// Getters
+
 func (u *Usuario) GetidUsuario() int {
-	return u.idUsuario
+	return u.IdUsuario
 }
 
 func (u *Usuario) GetNombre() string {
@@ -69,61 +69,69 @@ func (u *Usuario) GetNombre() string {
 func (u *Usuario) GetApellido() string {
 	return u.Apellido
 }
+
 func (u *Usuario) GetCorreo() string {
 	return u.Correo
 }
+
+func (u *Usuario) GetContrasena() string {
+	return u.Contrasena
+}
+
 func (u *Usuario) GetTelefono() string {
 	return u.Telefono
 }
+
 func (u *Usuario) GetRol() string {
 	return u.Rol
 }
 
-// Los SET modifica la informacion del usuario.
-func (u *Usuario) SetNombre(Nombre string) error {
-	if Nombre == "" {
-		return fmt.Errorf("El Nombre del Usuario no puede estra vacio")
+// Setters
+
+func (u *Usuario) SetNombre(nombre string) error {
+	if nombre == "" {
+		return fmt.Errorf("El Nombre del Usuario no puede estar vacio")
 	}
-	u.Nombre = Nombre
+	u.Nombre = nombre
 	return nil
 }
 
-func (u *Usuario) SetApellido(Apellido string) error {
-	if Apellido == "" {
-		return fmt.Errorf("El Apellido del Usuario no puede estra vacio")
+func (u *Usuario) SetApellido(apellido string) error {
+	if apellido == "" {
+		return fmt.Errorf("El Apellido del Usuario no puede estar vacio")
 	}
-	u.Apellido = Apellido
+	u.Apellido = apellido
 	return nil
 }
 
-func (u *Usuario) SetCorreo(Correo string) error {
-	if Correo == "" {
-		return fmt.Errorf("El Correo del Usuario no puede estra vacio")
+func (u *Usuario) SetCorreo(correo string) error {
+	if correo == "" {
+		return fmt.Errorf("El Correo del Usuario no puede estar vacio")
 	}
-	u.Correo = Correo
+	u.Correo = correo
 	return nil
 }
 
-func (u *Usuario) SetContrasena(Contrasena string) error {
-	if Contrasena == "" {
-		return fmt.Errorf("La contrasena del Usuario no puede estra vacio")
+func (u *Usuario) SetContrasena(contrasena string) error {
+	if contrasena == "" {
+		return fmt.Errorf("La contrasena del Usuario no puede estar vacio")
 	}
-	u.Contrasena = Contrasena
+	u.Contrasena = contrasena
 	return nil
 }
 
-func (u *Usuario) SetTelefono(Telefono string) error {
-	if Telefono == "" {
-		return fmt.Errorf("El Telefono del Usuario no puede estra vacio")
+func (u *Usuario) SetTelefono(telefono string) error {
+	if telefono == "" {
+		return fmt.Errorf("El Telefono del Usuario no puede estar vacio")
 	}
-	u.Telefono = Telefono
+	u.Telefono = telefono
 	return nil
 }
 
-func (u *Usuario) SetRol(Rol string) error {
-	if Rol == "" {
-		return fmt.Errorf("El Rol del Usuario no puede estra vacio")
+func (u *Usuario) SetRol(rol string) error {
+	if rol == "" {
+		return fmt.Errorf("El Rol del Usuario no puede estar vacio")
 	}
-	u.Rol = Rol
+	u.Rol = rol
 	return nil
 }

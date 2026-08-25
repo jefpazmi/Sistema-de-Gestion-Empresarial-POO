@@ -7,13 +7,13 @@ import (
 
 type Pedido struct {
 	idPedido  int
-	Fecha     time.Time
-	Estado    string
-	Total     float64
+	fecha     time.Time
+	estado    string
+	total     float64
 	idUsuario int
 }
 
-func NuevoPedido(idPedido int, Fecha time.Time, Estado string, Total float64, 
+func NuevoPedido(idPedido int, fecha time.Time, estado string, total float64, 
 	idUsuario int) (*Pedido, error) {
 
 	// Validación de la información
@@ -21,15 +21,15 @@ func NuevoPedido(idPedido int, Fecha time.Time, Estado string, Total float64,
 		return nil, fmt.Errorf("El ID del Pedido debe ser mayor a cero")
 	}
 
-	if Fecha.IsZero() {
+	if fecha.IsZero() {
 		return nil, fmt.Errorf("La Fecha del Pedido no debe estar vacía")
 	}
 
-	if Estado == "" {
+	if estado == "" {
 		return nil, fmt.Errorf("El Estado del Pedido no debe estar vacío")
 	}
 
-	if Total < 0 {
+	if total < 0 {
 		return nil, fmt.Errorf("El Total del Pedido no puede ser negativo")
 	}
 
@@ -40,9 +40,9 @@ func NuevoPedido(idPedido int, Fecha time.Time, Estado string, Total float64,
 	// Creación del objeto
 	pedido := &Pedido{
 		idPedido:  idPedido,
-		Fecha: Fecha,
-		Estado: Estado,
-		Total: Total,
+		fecha: fecha,
+		estado: estado,
+		total: total,
 		idUsuario: idUsuario,
 	}
 
@@ -56,20 +56,22 @@ func (p *Pedido) GetidPedido() int {
 }
 
 func (p *Pedido) GetFecha() time.Time {
-	return p.Fecha
+	return p.fecha
 }
 
 func (p *Pedido) GetEstado() string {
-	return p.Estado
+	return p.estado
 }
 
 func (p *Pedido) GetTotal() float64 {
-	return p.Total
+	return p.total
 }
 
 func (p *Pedido) GetidUsuario() int {
 	return p.idUsuario
 }
+
+// LOS SET
 
 func (p *Pedido) SetidPedido(idPedido int) error {
 	if idPedido <= 0 {
@@ -79,27 +81,27 @@ func (p *Pedido) SetidPedido(idPedido int) error {
 	return nil
 }
 
-func (p *Pedido) SetFecha(Fecha time.Time) error {
-	if Fecha.IsZero() {
+func (p *Pedido) SetFecha(fecha time.Time) error {
+	if fecha.IsZero() {
 		return fmt.Errorf("La Fecha del Pedido es obligatoria")
 	}
-	p.Fecha = Fecha
+	p.fecha = fecha
 	return nil
 }
 
-func (p *Pedido) SetEstado(Estado string) error {
-	if Estado == "" {
+func (p *Pedido) SetEstado(estado string) error {
+	if estado == "" {
 		return fmt.Errorf("El Estado del Pedido es obligatorio")
 	}
-	p.Estado = Estado
+	p.estado = estado
 	return nil
 }
 
-func (p *Pedido) SetTotal(Total float64) error {
-	if Total < 0 {
+func (p *Pedido) SetTotal(total float64) error {
+	if total < 0 {
 		return fmt.Errorf("El Total del Pedido no puede ser negativo")
 	}
-	p.Total = Total
+	p.total = total
 	return nil
 }
 	
